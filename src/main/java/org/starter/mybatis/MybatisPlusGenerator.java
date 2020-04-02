@@ -2,10 +2,7 @@ package org.starter.mybatis;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 public class MybatisPlusGenerator {
@@ -16,7 +13,8 @@ public class MybatisPlusGenerator {
 
         // 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setOutputDir(System.getProperty("user.dir") + "/src/main/java");
+        String projectPath = System.getProperty("user.dir");
+        globalConfig.setOutputDir(projectPath + "/src/main/java");
         globalConfig.setAuthor("jian");
         globalConfig.setFileOverride(true);
         globalConfig.setActiveRecord(true);
@@ -33,13 +31,24 @@ public class MybatisPlusGenerator {
         dataSourceConfig.setPassword("12345678");
         mpg.setDataSource(dataSourceConfig);
 
+        //配置自定义属性注入
         InjectionConfig injectionConfig = new InjectionConfig() {
             @Override
             public void initMap() {
 
             }
         };
-        mpg.setCfg(injectionConfig);//配置自定义属性注入
+        mpg.setCfg(injectionConfig);
+
+        //配置自定义模板
+        TemplateConfig templateConfig = new TemplateConfig();
+        templateConfig.setEntity("templates/entity.java");
+        templateConfig.setController(null);
+        templateConfig.setMapper(null);
+        templateConfig.setXml(null);
+        templateConfig.setService(null);
+        templateConfig.setServiceImpl(null);
+        mpg.setTemplate(templateConfig);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
