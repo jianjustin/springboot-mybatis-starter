@@ -23,3 +23,5 @@
         <version>3.3.1</version>
     </dependency>
     ``` 
+   
+3. 添加代码生成逻辑`MybatisPlusGenerator`

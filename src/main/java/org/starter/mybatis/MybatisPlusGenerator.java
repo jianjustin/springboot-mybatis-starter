@@ -43,11 +43,11 @@ public class MybatisPlusGenerator {
         //配置自定义模板
         TemplateConfig templateConfig = new TemplateConfig();
         templateConfig.setEntity("templates/entity.java");
-        templateConfig.setController(null);
-        templateConfig.setMapper(null);
-        templateConfig.setXml(null);
-        templateConfig.setService(null);
-        templateConfig.setServiceImpl(null);
+        templateConfig.setController("templates/controller.java");
+        templateConfig.setMapper("templates/mapper.java");
+        templateConfig.setXml("templates/mapper.xml");
+        templateConfig.setService("templates/service.java");
+        templateConfig.setServiceImpl("templates/serviceImpl.java");
         mpg.setTemplate(templateConfig);
 
         // 策略配置
