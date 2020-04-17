@@ -3,6 +3,7 @@ package org.starter.mybatis;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 public class MybatisPlusGenerator {
@@ -25,7 +26,7 @@ public class MybatisPlusGenerator {
 
         //数据源配置
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
-        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/authDB?useUnicode=true&useSSL=false&characterEncoding=utf8");
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSourceConfig.setUsername("root");
         dataSourceConfig.setPassword("12345678");
@@ -52,12 +53,14 @@ public class MybatisPlusGenerator {
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude(new String[] { "user" }); // 需要生成的表
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);// 列名生成策略(下划线转驼峰命名)
+        strategy.setInclude(new String[] { "sys_user","sys_role","sys_user_role","sys_resource","sys_permission" }); // 需要生成的表
         mpg.setStrategy(strategy);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("org.starter.mybatis");           //设置父包名
+        pc.setParent("org.jian.shadow");           //设置父包名
         mpg.setPackageInfo(pc);
 
         // 执行生成
